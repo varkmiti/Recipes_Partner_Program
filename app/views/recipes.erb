@@ -1,0 +1,9 @@
+<ol>
+<% Recipe.all.each do |recipe| %>
+     <li><%=recipe.name%>
+     <ul> <li><%=recipe.ingredients%></li>
+     <li><%=recipe.instructions%></li>
+     <li><%=recipe.minutes%></li>
+     <li><%=recipe.difficulty%></li></ul><br></li>
+<%end%>
+</ol>
