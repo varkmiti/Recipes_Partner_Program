@@ -3,3 +3,7 @@
 <p>Instructions: <%=@recipe.instructions%></p>
 <p>Minutes: <%=@recipe.minutes%></p>
 <p>Difficulty: <%=@recipe.difficulty%></p>
+<form method=POST action="/recipes/<%= @recipe.id %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="DELETE USER">
+</form>

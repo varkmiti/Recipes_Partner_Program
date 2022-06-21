@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    redirect '/recipes'
   end
 
   get "/recipes" do 
@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
     minutes: params[:minutes],
     difficulty: params[:difficulty])
     
-    erb :recipes
+    redirect '/recipes'
   end
 
   get "/recipes/:id" do 
@@ -34,10 +34,24 @@ class ApplicationController < Sinatra::Base
     erb :show
   end
 
-  # get "/recipes/:id/edit" do 
-  #   erb :edit
-  # end
+  get "/recipes/:id/edit" do 
+    @recipe = Recipe.find(params[:id].to_i)
+    erb :edit
+  end
+  
+  put "/recipes/:id" do
+    @recipe = Recipe.find(params[:id].to_i)
+    @recipe.update(name: params[:name], 
+    ingredients: params[:ingredients], 
+    instructions: params[:instructions], 
+    minutes: params[:minutes], 
+    difficulty: params[:difficulty])
 
-  # get ""
+    redirect "/recipes/#{@recipe.id}"
+  end
 
+  delete "/recipes/:id" do
+    Recipe.destroy(params[:id].to_i)
+    redirect '/recipes'
+  end
 end
